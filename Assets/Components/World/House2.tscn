@@ -1,0 +1,76 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Scripts/WarpOnEntry.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Components/TileMaps/InsideFloor.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Components/TileMaps/InsideTiles.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Components/Player/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Components/TileMaps/InsideWall.tscn" type="PackedScene" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7.28554, 4.32562 )
+
+[node name="House" type="Node2D"]
+
+[node name="TileMap" type="Node2D" parent="."]
+
+[node name="WallStructure" parent="TileMap" instance=ExtResource( 5 )]
+tile_data = PoolIntArray( 65538, 0, 3, 65539, 0, 1, 65540, 0, 1, 65541, 0, 1, 65542, 0, 1, 65543, 0, 65542, 65544, 0, 1, 65545, 0, 1, 65546, 0, 1, 65547, 0, 1, 65548, 0, 65542, 65549, 0, 1, 65550, 0, 1, 65551, 0, 1, 65552, 0, 1, 65553, 0, 4, 131074, 0, 65538, 131079, 0, 65538, 131084, 0, 65538, 131089, 0, 65538, 196610, 0, 65538, 196615, 0, 65538, 196620, 0, 65538, 196625, 0, 65538, 262146, 0, 65538, 262151, 0, 65538, 262156, 0, 65538, 262161, 0, 65538, 327682, 0, 131072, 327687, 0, 131072, 327692, 0, 131072, 327697, 0, 131072 )
+
+[node name="InsideFloor" parent="TileMap" instance=ExtResource( 2 )]
+tile_data = PoolIntArray( 262147, 0, 131076, 262148, 0, 131076, 262149, 0, 131076, 262150, 0, 131076, 262152, 0, 131076, 262153, 0, 131076, 262154, 0, 131076, 262155, 0, 131076, 262157, 0, 131076, 262158, 0, 131076, 262159, 0, 131076, 262160, 0, 131076, 327683, 0, 131076, 327684, 0, 131076, 327685, 0, 131076, 327686, 0, 131076, 327688, 0, 131076, 327689, 0, 131076, 327690, 0, 131076, 327691, 0, 131076, 327693, 0, 131076, 327694, 0, 131076, 327695, 0, 131076, 327696, 0, 131076, 393219, 0, 131076, 393220, 0, 131076, 393221, 0, 131076, 393222, 0, 131076, 393224, 0, 131076, 393225, 0, 131076, 393226, 0, 131076, 393227, 0, 131076, 393229, 0, 131076, 393230, 0, 131076, 393231, 0, 131076, 393232, 0, 131076, 458755, 0, 131076, 458756, 0, 131076, 458757, 0, 131076, 458758, 0, 131076, 458760, 0, 131076, 458761, 0, 131076, 458762, 0, 131076, 458763, 0, 131076, 458765, 0, 131076, 458766, 0, 131076, 458767, 0, 131076, 458768, 0, 131076, 524291, 0, 131076, 524292, 0, 131076, 524293, 0, 131076, 524294, 0, 131076, 524295, 0, 131076, 524296, 0, 131076, 524297, 0, 131076, 524298, 0, 131076, 524299, 0, 131076, 524300, 0, 131076, 524301, 0, 131076, 524302, 0, 131076, 524303, 0, 131076, 524304, 0, 131076, 589839, 0, 131076 )
+
+[node name="Wall" parent="TileMap" instance=ExtResource( 3 )]
+tile_data = PoolIntArray( 131075, 0, 983068, 131076, 0, 983069, 131077, 0, 983069, 131078, 0, 983070, 131080, 0, 983068, 131081, 0, 983069, 131082, 0, 983069, 131083, 0, 983070, 131085, 0, 983068, 131086, 0, 983069, 131087, 0, 983069, 131088, 0, 983070, 196611, 0, 983065, 196612, 0, 983064, 196613, 0, 983064, 196614, 0, 983067, 196616, 0, 983065, 196617, 0, 983064, 196618, 0, 983064, 196619, 0, 983067, 196621, 0, 983065, 196622, 0, 983064, 196623, 0, 983064, 196624, 0, 983067, 393218, 0, 1114139, 393223, 0, 1114139, 393228, 0, 1114139, 393233, 0, 1114139, 458754, 0, 1114139, 458759, 0, 1114139, 458764, 0, 1114139, 458769, 0, 1114139 )
+
+[node name="WallDecoration" parent="TileMap" instance=ExtResource( 3 )]
+
+[node name="Windows" parent="TileMap" instance=ExtResource( 3 )]
+tile_data = PoolIntArray( 131076, 0, 131108, 131080, 0, 131108, 131083, 0, 131108, 131087, 0, 131108 )
+
+[node name="InsideTiles" parent="TileMap" instance=ExtResource( 3 )]
+
+[node name="Carpet" parent="TileMap" instance=ExtResource( 3 )]
+
+[node name="WorldObjects" type="YSort" parent="."]
+
+[node name="Chairs" parent="WorldObjects" instance=ExtResource( 3 )]
+
+[node name="Tables" parent="WorldObjects" instance=ExtResource( 3 )]
+
+[node name="TableStuff" parent="WorldObjects" instance=ExtResource( 3 )]
+
+[node name="Stairs" parent="WorldObjects" instance=ExtResource( 3 )]
+tile_data = PoolIntArray( 262152, 0, 1179673 )
+
+[node name="Player" parent="WorldObjects" instance=ExtResource( 4 )]
+position = Vector2( 248, 152 )
+
+[node name="Colliders" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Colliders"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colliders/StaticBody2D"]
+polygon = PoolVector2Array( 47.6779, 59.525, 32, 48, 32, 128, 32, 160, 224, 160, 224, 176, 272, 176, 272, 160, 288, 160, 288, 144, 288, 144, 288, 128, 288, 56, 288, 48, 32, 48, 47.6877, 59.6317, 271.786, 60.7646, 272, 56, 272, 144, 256, 144, 256, 160, 240, 160, 240, 144, 48, 144 )
+
+[node name="Stairs" type="Area2D" parent="."]
+position = Vector2( 137.296, 71.6391 )
+collision_mask = 0
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stairs"]
+position = Vector2( -1.50247, 1.28783 )
+shape = SubResource( 1 )
+
+[node name="Door" type="Area2D" parent="."]
+position = Vector2( 137.296, 71.6391 )
+collision_mask = 0
+script = ExtResource( 1 )
+path = "res://Assets/World/1-Village.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
+position = Vector2( 110.652, 84.6524 )
+shape = SubResource( 1 )
+[connection signal="body_entered" from="Stairs" to="Stairs" method="_on_WarpOnEntry_body_entered"]
+[connection signal="body_exited" from="Stairs" to="Stairs" method="_on_WarpOnEntry_body_exited"]
+[connection signal="body_entered" from="Door" to="Door" method="_on_WarpOnEntry_body_entered"]
+[connection signal="body_exited" from="Door" to="Door" method="_on_WarpOnEntry_body_exited"]

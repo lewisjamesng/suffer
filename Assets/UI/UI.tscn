@@ -1,0 +1,1446 @@
+[gd_scene load_steps=38 format=2]
+
+[ext_resource path="res://Assets/UI/barOnTop.png" type="Texture" id=1]
+[ext_resource path="res://Assets/UI/manaBar.png" type="Texture" id=2]
+[ext_resource path="res://Assets/UI/staminaBar.png" type="Texture" id=3]
+[ext_resource path="res://Assets/UI/healthBar.png" type="Texture" id=4]
+[ext_resource path="res://Assets/UI/XPBar.png" type="Texture" id=5]
+[ext_resource path="res://Assets/UI/inventory_background.png" type="Texture" id=6]
+[ext_resource path="res://Assets/UI/UI.gd" type="Script" id=7]
+[ext_resource path="res://Assets/UI/barBackground.png" type="Texture" id=8]
+[ext_resource path="res://Assets/UI/VT323-Regular.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://Assets/UI/LevelUp/heart.png" type="Texture" id=10]
+[ext_resource path="res://Assets/UI/stat_background.png" type="Texture" id=11]
+[ext_resource path="res://Assets/UI/LevelUp/mana.png" type="Texture" id=12]
+[ext_resource path="res://Assets/UI/LevelUp/speed.png" type="Texture" id=13]
+[ext_resource path="res://Assets/UI/LevelUp/sword.png" type="Texture" id=14]
+[ext_resource path="res://Assets/UI/LevelUp/shield.png" type="Texture" id=15]
+[ext_resource path="res://Assets/UI/LevelUp/stat_plus.png" type="Texture" id=16]
+[ext_resource path="res://Assets/UI/LevelUp/regen_plus.png" type="Texture" id=17]
+[ext_resource path="res://Assets/UI/LevelUp/bow.png" type="Texture" id=18]
+[ext_resource path="res://Assets/UI/LevelUp/attack_speed_plus.png" type="Texture" id=19]
+[ext_resource path="res://Assets/UI/LevelUp/spell.png" type="Texture" id=20]
+[ext_resource path="res://Assets/UI/LevelUp/stamina.png" type="Texture" id=21]
+[ext_resource path="res://Assets/UI/interact_background.png" type="Texture" id=22]
+[ext_resource path="res://Assets/UI/level_up_background.png" type="Texture" id=23]
+[ext_resource path="res://Assets/UI/Fonts/8bitOperatorPlus8-Regular.ttf" type="DynamicFontData" id=24]
+[ext_resource path="res://Assets/UI/SkillLevels.gd" type="Script" id=25]
+[ext_resource path="res://Assets/UI/Fonts/8bitOperatorPlus-Regular.ttf" type="DynamicFontData" id=26]
+[ext_resource path="res://Assets/UI/dialogue_background.png" type="Texture" id=27]
+[ext_resource path="res://Assets/UI/Fonts/8bitOperatorPlusSC-Bold.ttf" type="DynamicFontData" id=28]
+
+[sub_resource type="DynamicFont" id=1]
+size = 7
+extra_spacing_top = -3
+font_data = ExtResource( 26 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 8
+font_data = ExtResource( 28 )
+
+[sub_resource type="DynamicFont" id=3]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=4]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 24 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 6
+font_data = ExtResource( 26 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 10
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 9 )
+
+[sub_resource type="Theme" id=7]
+default_font = SubResource( 6 )
+
+[sub_resource type="Animation" id=8]
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("FlashPlayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 0 ), Color( 1, 0, 0, 0.176471 ), Color( 1, 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Stats/StatBars/Health:tint_under")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.823529 ), Color( 1, 0, 0, 0.501961 ), Color( 1, 1, 1, 0.823529 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("FadePlayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource( 7 )
+
+[node name="Dialogue" type="Control" parent="."]
+visible = false
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -180.0
+margin_right = 40.0
+margin_bottom = -140.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Dialogue"]
+anchor_top = 4.5
+anchor_bottom = 4.5
+margin_left = 10.0
+margin_top = -85.0
+margin_bottom = -8.0
+texture = ExtResource( 27 )
+
+[node name="Text" type="Label" parent="Dialogue"]
+anchor_top = 4.5
+anchor_bottom = 4.5
+margin_left = 16.0
+margin_top = -80.0
+margin_right = 303.0
+margin_bottom = -15.0
+rect_min_size = Vector2( 288, 65 )
+rect_clip_content = true
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = " mwp efmpwe  mwp efmpwe  mwp efmpwe  mwp efmpwe  mwp efmpwe  mwp efmpwe  mwp efmpwe  mwp efmpwe  mwp efmpwe  mwp efmpwe  mwp efmpwe  mwp efmpwe  mwp efmpwe  mwp efmpwe  mwp efmpwe  mwp efmpwe  mwp efmpwe  mwp efmpwe  mwp efmpwe  mwp efmpwe  mwp efmpwe  mwp efmpwe  mwp efmpwe  mwp efmpwe  mwp efmpwe  mwp efmpwe  mwp efmpwe "
+autowrap = true
+
+[node name="Label" type="Label" parent="Dialogue"]
+anchor_left = 8.0
+anchor_top = 4.5
+anchor_right = 8.0
+anchor_bottom = 4.5
+margin_left = -53.5525
+margin_top = -24.8669
+margin_right = -7.55252
+margin_bottom = -9.86693
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "F - Next"
+
+[node name="Inventory" type="Control" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Inventory"]
+margin_right = 320.0
+margin_bottom = 180.0
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Inventory"]
+margin_left = 30.0
+margin_top = 30.0
+margin_right = 290.0
+margin_bottom = 150.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="Inventory/HBoxContainer"]
+margin_bottom = 120.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Inventory/HBoxContainer/Control"]
+margin_left = 4.0
+margin_right = 154.0
+margin_bottom = 144.0
+rect_scale = Vector2( 0.75, 0.75 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StatLevels" type="GridContainer" parent="Inventory/HBoxContainer/Control/VBoxContainer"]
+margin_right = 150.0
+margin_bottom = 70.0
+custom_constants/vseparation = 5
+custom_constants/hseparation = 10
+columns = 4
+script = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BowStat" type="VBoxContainer" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels"]
+margin_right = 30.0
+margin_bottom = 20.0
+
+[node name="StatBackground" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/BowStat"]
+margin_right = 30.0
+margin_bottom = 20.0
+texture = ExtResource( 11 )
+
+[node name="MainTexture" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/BowStat/StatBackground"]
+margin_left = 3.0
+margin_top = 2.0
+margin_right = 19.0
+margin_bottom = 39.0
+rect_scale = Vector2( 0.875, 0.875 )
+texture = ExtResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlusTexture" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/BowStat/StatBackground"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 39.0
+texture = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/BowStat/StatBackground"]
+margin_left = 19.0
+margin_top = 1.5
+margin_right = 25.0
+margin_bottom = 38.5
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "1
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ManaStat" type="HBoxContainer" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels"]
+margin_left = 40.0
+margin_right = 70.0
+margin_bottom = 20.0
+
+[node name="StatBackground" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/ManaStat"]
+margin_right = 30.0
+margin_bottom = 20.0
+texture = ExtResource( 11 )
+
+[node name="MainTexture" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/ManaStat/StatBackground"]
+margin_left = 2.0
+margin_top = 1.0
+margin_right = 18.0
+margin_bottom = 38.0
+texture = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlusTexture" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/ManaStat/StatBackground"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 39.0
+texture = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/ManaStat/StatBackground"]
+margin_left = 19.0
+margin_top = 1.5
+margin_right = 25.0
+margin_bottom = 38.5
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "1
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StaminaStat" type="HBoxContainer" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels"]
+margin_left = 80.0
+margin_right = 110.0
+margin_bottom = 20.0
+
+[node name="StatBackground" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/StaminaStat"]
+margin_right = 30.0
+margin_bottom = 20.0
+texture = ExtResource( 11 )
+
+[node name="MainTexture" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/StaminaStat/StatBackground"]
+margin_left = 3.0
+margin_top = 2.0
+margin_right = 19.0
+margin_bottom = 39.0
+texture = ExtResource( 21 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlusTexture" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/StaminaStat/StatBackground"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 39.0
+texture = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/StaminaStat/StatBackground"]
+margin_left = 19.0
+margin_top = 1.5
+margin_right = 25.0
+margin_bottom = 38.5
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "1
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SwordStat" type="HBoxContainer" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels"]
+margin_left = 120.0
+margin_right = 150.0
+margin_bottom = 20.0
+
+[node name="StatBackground" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/SwordStat"]
+margin_right = 30.0
+margin_bottom = 20.0
+texture = ExtResource( 11 )
+
+[node name="MainTexture" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/SwordStat/StatBackground"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 19.0
+margin_bottom = 40.0
+rect_scale = Vector2( 0.875, 0.875 )
+texture = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlusTexture" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/SwordStat/StatBackground"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 39.0
+texture = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/SwordStat/StatBackground"]
+margin_left = 19.0
+margin_top = 1.5
+margin_right = 25.0
+margin_bottom = 38.5
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "1
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BowSpeedStat" type="HBoxContainer" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels"]
+margin_top = 25.0
+margin_right = 30.0
+margin_bottom = 45.0
+
+[node name="StatBackground" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/BowSpeedStat"]
+margin_right = 30.0
+margin_bottom = 20.0
+texture = ExtResource( 11 )
+
+[node name="MainTexture" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/BowSpeedStat/StatBackground"]
+margin_left = 3.0
+margin_top = 2.0
+margin_right = 19.0
+margin_bottom = 39.0
+rect_scale = Vector2( 0.875, 0.875 )
+texture = ExtResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlusTexture" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/BowSpeedStat/StatBackground"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 39.0
+texture = ExtResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/BowSpeedStat/StatBackground"]
+margin_left = 19.0
+margin_top = 1.5
+margin_right = 25.0
+margin_bottom = 38.5
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "1
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ManaRegenStat" type="HBoxContainer" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels"]
+margin_left = 40.0
+margin_top = 25.0
+margin_right = 70.0
+margin_bottom = 45.0
+
+[node name="StatBackground" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/ManaRegenStat"]
+margin_right = 30.0
+margin_bottom = 20.0
+texture = ExtResource( 11 )
+
+[node name="MainTexture" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/ManaRegenStat/StatBackground"]
+margin_left = 2.0
+margin_top = 1.0
+margin_right = 18.0
+margin_bottom = 38.0
+texture = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlusTexture" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/ManaRegenStat/StatBackground"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 39.0
+texture = ExtResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/ManaRegenStat/StatBackground"]
+margin_left = 19.0
+margin_top = 1.5
+margin_right = 25.0
+margin_bottom = 38.5
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "1
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StaminaRegenStat" type="HBoxContainer" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels"]
+margin_left = 80.0
+margin_top = 25.0
+margin_right = 110.0
+margin_bottom = 45.0
+
+[node name="StatBackground" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/StaminaRegenStat"]
+margin_right = 30.0
+margin_bottom = 20.0
+texture = ExtResource( 11 )
+
+[node name="MainTexture" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/StaminaRegenStat/StatBackground"]
+margin_left = 3.0
+margin_top = 2.0
+margin_right = 19.0
+margin_bottom = 39.0
+texture = ExtResource( 21 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlusTexture" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/StaminaRegenStat/StatBackground"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 39.0
+texture = ExtResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/StaminaRegenStat/StatBackground"]
+margin_left = 19.0
+margin_top = 1.5
+margin_right = 25.0
+margin_bottom = 38.5
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "1
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SwordSpeedStat" type="HBoxContainer" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels"]
+margin_left = 120.0
+margin_top = 25.0
+margin_right = 150.0
+margin_bottom = 45.0
+
+[node name="StatBackground" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/SwordSpeedStat"]
+margin_right = 30.0
+margin_bottom = 20.0
+texture = ExtResource( 11 )
+
+[node name="MainTexture" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/SwordSpeedStat/StatBackground"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 19.0
+margin_bottom = 40.0
+rect_scale = Vector2( 0.875, 0.875 )
+texture = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlusTexture" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/SwordSpeedStat/StatBackground"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 39.0
+texture = ExtResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/SwordSpeedStat/StatBackground"]
+margin_left = 19.0
+margin_top = 1.5
+margin_right = 25.0
+margin_bottom = 38.5
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "1
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DefenseStat" type="HBoxContainer" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels"]
+margin_top = 50.0
+margin_right = 30.0
+margin_bottom = 70.0
+
+[node name="StatBackground" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/DefenseStat"]
+margin_right = 30.0
+margin_bottom = 20.0
+texture = ExtResource( 11 )
+
+[node name="MainTexture" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/DefenseStat/StatBackground"]
+margin_left = 3.0
+margin_top = 2.0
+margin_right = 19.0
+margin_bottom = 39.0
+texture = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlusTexture" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/DefenseStat/StatBackground"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 39.0
+texture = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/DefenseStat/StatBackground"]
+margin_left = 19.0
+margin_top = 1.5
+margin_right = 25.0
+margin_bottom = 38.5
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "1
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthStat" type="HBoxContainer" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels"]
+margin_left = 40.0
+margin_top = 50.0
+margin_right = 70.0
+margin_bottom = 70.0
+
+[node name="StatBackground" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/HealthStat"]
+margin_right = 30.0
+margin_bottom = 20.0
+texture = ExtResource( 11 )
+
+[node name="MainTexture" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/HealthStat/StatBackground"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 39.0
+texture = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlusTexture" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/HealthStat/StatBackground"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 39.0
+texture = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/HealthStat/StatBackground"]
+margin_left = 19.0
+margin_top = 1.5
+margin_right = 25.0
+margin_bottom = 38.5
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "1
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MagicStat" type="HBoxContainer" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels"]
+margin_left = 80.0
+margin_top = 50.0
+margin_right = 110.0
+margin_bottom = 70.0
+
+[node name="StatBackground" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/MagicStat"]
+margin_right = 30.0
+margin_bottom = 20.0
+texture = ExtResource( 11 )
+
+[node name="MainTexture" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/MagicStat/StatBackground"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 19.0
+margin_bottom = 40.0
+rect_scale = Vector2( 0.875, 0.875 )
+texture = ExtResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlusTexture" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/MagicStat/StatBackground"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 39.0
+texture = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/MagicStat/StatBackground"]
+margin_left = 19.0
+margin_top = 1.5
+margin_right = 25.0
+margin_bottom = 38.5
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "1
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpeedStat" type="HBoxContainer" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels"]
+margin_left = 120.0
+margin_top = 50.0
+margin_right = 150.0
+margin_bottom = 70.0
+
+[node name="StatBackground" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/SpeedStat"]
+margin_right = 30.0
+margin_bottom = 20.0
+texture = ExtResource( 11 )
+
+[node name="MainTexture" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/SpeedStat/StatBackground"]
+margin_left = 3.0
+margin_top = 2.0
+margin_right = 19.0
+margin_bottom = 39.0
+texture = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlusTexture" type="TextureRect" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/SpeedStat/StatBackground"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 39.0
+texture = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="Inventory/HBoxContainer/Control/VBoxContainer/StatLevels/SpeedStat/StatBackground"]
+margin_left = 19.0
+margin_top = 1.5
+margin_right = 25.0
+margin_bottom = 38.5
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "1
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control2" type="Control" parent="Inventory/HBoxContainer"]
+margin_left = 4.0
+margin_right = 4.0
+margin_bottom = 120.0
+
+[node name="LevelUp" type="Control" parent="."]
+visible = false
+margin_right = 320.0
+margin_bottom = 180.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="LevelUp"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 23 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="LevelUp"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_scale = Vector2( 1.5, 1.5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelUpStatLevels" type="GridContainer" parent="LevelUp/Control"]
+margin_left = 30.0
+margin_top = 30.0
+margin_right = 184.0
+margin_bottom = 100.0
+custom_constants/vseparation = 5
+custom_constants/hseparation = 10
+columns = 4
+script = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BowStat" type="VBoxContainer" parent="LevelUp/Control/LevelUpStatLevels"]
+margin_right = 30.0
+margin_bottom = 20.0
+
+[node name="StatBackground" type="TextureButton" parent="LevelUp/Control/LevelUpStatLevels/BowStat"]
+margin_right = 30.0
+margin_bottom = 20.0
+texture_normal = ExtResource( 11 )
+
+[node name="MainTexture" type="TextureRect" parent="LevelUp/Control/LevelUpStatLevels/BowStat/StatBackground"]
+margin_left = 3.0
+margin_top = 2.0
+margin_right = 19.0
+margin_bottom = 39.0
+rect_scale = Vector2( 0.875, 0.875 )
+texture = ExtResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlusTexture" type="TextureRect" parent="LevelUp/Control/LevelUpStatLevels/BowStat/StatBackground"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 39.0
+texture = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="LevelUp/Control/LevelUpStatLevels/BowStat/StatBackground"]
+margin_left = 19.0
+margin_top = 1.5
+margin_right = 25.0
+margin_bottom = 38.5
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "1
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ManaStat" type="HBoxContainer" parent="LevelUp/Control/LevelUpStatLevels"]
+margin_left = 40.0
+margin_right = 70.0
+margin_bottom = 20.0
+
+[node name="StatBackground" type="TextureButton" parent="LevelUp/Control/LevelUpStatLevels/ManaStat"]
+margin_right = 30.0
+margin_bottom = 20.0
+texture_normal = ExtResource( 11 )
+
+[node name="MainTexture" type="TextureRect" parent="LevelUp/Control/LevelUpStatLevels/ManaStat/StatBackground"]
+margin_left = 2.0
+margin_top = 1.0
+margin_right = 18.0
+margin_bottom = 38.0
+texture = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlusTexture" type="TextureRect" parent="LevelUp/Control/LevelUpStatLevels/ManaStat/StatBackground"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 39.0
+texture = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="LevelUp/Control/LevelUpStatLevels/ManaStat/StatBackground"]
+margin_left = 19.0
+margin_top = 1.5
+margin_right = 25.0
+margin_bottom = 38.5
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "1
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StaminaStat" type="HBoxContainer" parent="LevelUp/Control/LevelUpStatLevels"]
+margin_left = 80.0
+margin_right = 110.0
+margin_bottom = 20.0
+
+[node name="StatBackground" type="TextureButton" parent="LevelUp/Control/LevelUpStatLevels/StaminaStat"]
+margin_right = 30.0
+margin_bottom = 20.0
+texture_normal = ExtResource( 11 )
+
+[node name="MainTexture" type="TextureRect" parent="LevelUp/Control/LevelUpStatLevels/StaminaStat/StatBackground"]
+margin_left = 3.0
+margin_top = 2.0
+margin_right = 19.0
+margin_bottom = 39.0
+texture = ExtResource( 21 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlusTexture" type="TextureRect" parent="LevelUp/Control/LevelUpStatLevels/StaminaStat/StatBackground"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 39.0
+texture = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="LevelUp/Control/LevelUpStatLevels/StaminaStat/StatBackground"]
+margin_left = 19.0
+margin_top = 1.5
+margin_right = 25.0
+margin_bottom = 38.5
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "1
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SwordStat" type="HBoxContainer" parent="LevelUp/Control/LevelUpStatLevels"]
+margin_left = 120.0
+margin_right = 150.0
+margin_bottom = 20.0
+
+[node name="StatBackground" type="TextureButton" parent="LevelUp/Control/LevelUpStatLevels/SwordStat"]
+margin_right = 30.0
+margin_bottom = 20.0
+texture_normal = ExtResource( 11 )
+
+[node name="MainTexture" type="TextureRect" parent="LevelUp/Control/LevelUpStatLevels/SwordStat/StatBackground"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 19.0
+margin_bottom = 40.0
+rect_scale = Vector2( 0.875, 0.875 )
+texture = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlusTexture" type="TextureRect" parent="LevelUp/Control/LevelUpStatLevels/SwordStat/StatBackground"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 39.0
+texture = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="LevelUp/Control/LevelUpStatLevels/SwordStat/StatBackground"]
+margin_left = 19.0
+margin_top = 1.5
+margin_right = 25.0
+margin_bottom = 38.5
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "1
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BowSpeedStat" type="HBoxContainer" parent="LevelUp/Control/LevelUpStatLevels"]
+margin_top = 25.0
+margin_right = 30.0
+margin_bottom = 45.0
+
+[node name="StatBackground" type="TextureButton" parent="LevelUp/Control/LevelUpStatLevels/BowSpeedStat"]
+margin_right = 30.0
+margin_bottom = 20.0
+texture_normal = ExtResource( 11 )
+
+[node name="MainTexture" type="TextureRect" parent="LevelUp/Control/LevelUpStatLevels/BowSpeedStat/StatBackground"]
+margin_left = 3.0
+margin_top = 2.0
+margin_right = 19.0
+margin_bottom = 39.0
+rect_scale = Vector2( 0.875, 0.875 )
+texture = ExtResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlusTexture" type="TextureRect" parent="LevelUp/Control/LevelUpStatLevels/BowSpeedStat/StatBackground"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 39.0
+texture = ExtResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="LevelUp/Control/LevelUpStatLevels/BowSpeedStat/StatBackground"]
+margin_left = 19.0
+margin_top = 1.5
+margin_right = 25.0
+margin_bottom = 38.5
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "1
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ManaRegenStat" type="HBoxContainer" parent="LevelUp/Control/LevelUpStatLevels"]
+margin_left = 40.0
+margin_top = 25.0
+margin_right = 70.0
+margin_bottom = 45.0
+
+[node name="StatBackground" type="TextureButton" parent="LevelUp/Control/LevelUpStatLevels/ManaRegenStat"]
+margin_right = 30.0
+margin_bottom = 20.0
+texture_normal = ExtResource( 11 )
+
+[node name="MainTexture" type="TextureRect" parent="LevelUp/Control/LevelUpStatLevels/ManaRegenStat/StatBackground"]
+margin_left = 2.0
+margin_top = 1.0
+margin_right = 18.0
+margin_bottom = 38.0
+texture = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlusTexture" type="TextureRect" parent="LevelUp/Control/LevelUpStatLevels/ManaRegenStat/StatBackground"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 39.0
+texture = ExtResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="LevelUp/Control/LevelUpStatLevels/ManaRegenStat/StatBackground"]
+margin_left = 19.0
+margin_top = 1.5
+margin_right = 25.0
+margin_bottom = 38.5
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "1
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StaminaRegenStat" type="HBoxContainer" parent="LevelUp/Control/LevelUpStatLevels"]
+margin_left = 80.0
+margin_top = 25.0
+margin_right = 110.0
+margin_bottom = 45.0
+
+[node name="StatBackground" type="TextureButton" parent="LevelUp/Control/LevelUpStatLevels/StaminaRegenStat"]
+margin_right = 30.0
+margin_bottom = 20.0
+texture_normal = ExtResource( 11 )
+
+[node name="MainTexture" type="TextureRect" parent="LevelUp/Control/LevelUpStatLevels/StaminaRegenStat/StatBackground"]
+margin_left = 3.0
+margin_top = 2.0
+margin_right = 19.0
+margin_bottom = 39.0
+texture = ExtResource( 21 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlusTexture" type="TextureRect" parent="LevelUp/Control/LevelUpStatLevels/StaminaRegenStat/StatBackground"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 39.0
+texture = ExtResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="LevelUp/Control/LevelUpStatLevels/StaminaRegenStat/StatBackground"]
+margin_left = 19.0
+margin_top = 1.5
+margin_right = 25.0
+margin_bottom = 38.5
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "1
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SwordSpeedStat" type="HBoxContainer" parent="LevelUp/Control/LevelUpStatLevels"]
+margin_left = 120.0
+margin_top = 25.0
+margin_right = 150.0
+margin_bottom = 45.0
+
+[node name="StatBackground" type="TextureButton" parent="LevelUp/Control/LevelUpStatLevels/SwordSpeedStat"]
+margin_right = 30.0
+margin_bottom = 20.0
+texture_normal = ExtResource( 11 )
+
+[node name="MainTexture" type="TextureRect" parent="LevelUp/Control/LevelUpStatLevels/SwordSpeedStat/StatBackground"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 19.0
+margin_bottom = 40.0
+rect_scale = Vector2( 0.875, 0.875 )
+texture = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlusTexture" type="TextureRect" parent="LevelUp/Control/LevelUpStatLevels/SwordSpeedStat/StatBackground"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 39.0
+texture = ExtResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="LevelUp/Control/LevelUpStatLevels/SwordSpeedStat/StatBackground"]
+margin_left = 19.0
+margin_top = 1.5
+margin_right = 25.0
+margin_bottom = 38.5
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "1
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DefenseStat" type="HBoxContainer" parent="LevelUp/Control/LevelUpStatLevels"]
+margin_top = 50.0
+margin_right = 30.0
+margin_bottom = 70.0
+
+[node name="StatBackground" type="TextureButton" parent="LevelUp/Control/LevelUpStatLevels/DefenseStat"]
+margin_right = 30.0
+margin_bottom = 20.0
+texture_normal = ExtResource( 11 )
+
+[node name="MainTexture" type="TextureRect" parent="LevelUp/Control/LevelUpStatLevels/DefenseStat/StatBackground"]
+margin_left = 3.0
+margin_top = 2.0
+margin_right = 19.0
+margin_bottom = 39.0
+texture = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlusTexture" type="TextureRect" parent="LevelUp/Control/LevelUpStatLevels/DefenseStat/StatBackground"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 39.0
+texture = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="LevelUp/Control/LevelUpStatLevels/DefenseStat/StatBackground"]
+margin_left = 19.0
+margin_top = 1.5
+margin_right = 25.0
+margin_bottom = 38.5
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "1
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthStat" type="HBoxContainer" parent="LevelUp/Control/LevelUpStatLevels"]
+margin_left = 40.0
+margin_top = 50.0
+margin_right = 70.0
+margin_bottom = 70.0
+
+[node name="StatBackground" type="TextureButton" parent="LevelUp/Control/LevelUpStatLevels/HealthStat"]
+margin_right = 30.0
+margin_bottom = 20.0
+texture_normal = ExtResource( 11 )
+
+[node name="MainTexture" type="TextureRect" parent="LevelUp/Control/LevelUpStatLevels/HealthStat/StatBackground"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 39.0
+texture = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlusTexture" type="TextureRect" parent="LevelUp/Control/LevelUpStatLevels/HealthStat/StatBackground"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 39.0
+texture = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="LevelUp/Control/LevelUpStatLevels/HealthStat/StatBackground"]
+margin_left = 19.0
+margin_top = 1.5
+margin_right = 25.0
+margin_bottom = 38.5
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "1
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MagicStat" type="HBoxContainer" parent="LevelUp/Control/LevelUpStatLevels"]
+margin_left = 80.0
+margin_top = 50.0
+margin_right = 110.0
+margin_bottom = 70.0
+
+[node name="StatBackground" type="TextureButton" parent="LevelUp/Control/LevelUpStatLevels/MagicStat"]
+margin_right = 30.0
+margin_bottom = 20.0
+texture_normal = ExtResource( 11 )
+
+[node name="MainTexture" type="TextureRect" parent="LevelUp/Control/LevelUpStatLevels/MagicStat/StatBackground"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 19.0
+margin_bottom = 40.0
+rect_scale = Vector2( 0.875, 0.875 )
+texture = ExtResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlusTexture" type="TextureRect" parent="LevelUp/Control/LevelUpStatLevels/MagicStat/StatBackground"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 39.0
+texture = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="LevelUp/Control/LevelUpStatLevels/MagicStat/StatBackground"]
+margin_left = 19.0
+margin_top = 1.5
+margin_right = 25.0
+margin_bottom = 38.5
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "1
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpeedStat" type="HBoxContainer" parent="LevelUp/Control/LevelUpStatLevels"]
+margin_left = 120.0
+margin_top = 50.0
+margin_right = 150.0
+margin_bottom = 70.0
+
+[node name="StatBackground" type="TextureButton" parent="LevelUp/Control/LevelUpStatLevels/SpeedStat"]
+margin_right = 30.0
+margin_bottom = 20.0
+texture_normal = ExtResource( 11 )
+
+[node name="MainTexture" type="TextureRect" parent="LevelUp/Control/LevelUpStatLevels/SpeedStat/StatBackground"]
+margin_left = 3.0
+margin_top = 2.0
+margin_right = 19.0
+margin_bottom = 39.0
+texture = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlusTexture" type="TextureRect" parent="LevelUp/Control/LevelUpStatLevels/SpeedStat/StatBackground"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 39.0
+texture = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="LevelUp/Control/LevelUpStatLevels/SpeedStat/StatBackground"]
+margin_left = 19.0
+margin_top = 1.5
+margin_right = 25.0
+margin_bottom = 38.5
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "1
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="LevelUp/Control"]
+margin_left = 65.0
+margin_top = 18.0
+margin_right = 40.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 4 )
+text = "LEVEL UP"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Interact" type="Control" parent="."]
+visible = false
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Interact"]
+anchor_right = 1.0
+margin_left = -44.9487
+margin_top = 4.0
+margin_right = -4.94867
+margin_bottom = 39.0
+texture = ExtResource( 22 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Interact"]
+margin_left = -37.1661
+margin_top = 9.0
+margin_right = 26.8339
+margin_bottom = 22.0
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Press F to interact"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stats" type="HBoxContainer" parent="."]
+visible = false
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 78.0
+margin_bottom = 23.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StatBars" type="VBoxContainer" parent="Stats"]
+margin_right = 70.0
+margin_bottom = 19.0
+custom_constants/separation = 1
+
+[node name="Health" type="TextureProgress" parent="Stats/StatBars"]
+margin_right = 70.0
+margin_bottom = 4.0
+value = 100.0
+texture_under = ExtResource( 8 )
+texture_over = ExtResource( 1 )
+texture_progress = ExtResource( 4 )
+tint_under = Color( 1, 1, 1, 0.823529 )
+
+[node name="Mana" type="TextureProgress" parent="Stats/StatBars"]
+margin_top = 5.0
+margin_right = 70.0
+margin_bottom = 9.0
+value = 100.0
+texture_under = ExtResource( 8 )
+texture_over = ExtResource( 1 )
+texture_progress = ExtResource( 2 )
+tint_under = Color( 1, 1, 1, 0.823529 )
+
+[node name="Stamina" type="TextureProgress" parent="Stats/StatBars"]
+margin_top = 10.0
+margin_right = 70.0
+margin_bottom = 14.0
+value = 100.0
+texture_under = ExtResource( 8 )
+texture_over = ExtResource( 1 )
+texture_progress = ExtResource( 3 )
+tint_under = Color( 1, 1, 1, 0.823529 )
+
+[node name="XP" type="TextureProgress" parent="Stats/StatBars"]
+margin_top = 15.0
+margin_right = 70.0
+margin_bottom = 19.0
+value = 100.0
+texture_under = ExtResource( 8 )
+texture_over = ExtResource( 1 )
+texture_progress = ExtResource( 5 )
+tint_under = Color( 1, 1, 1, 0.823529 )
+
+[node name="Control" type="Control" parent="Stats"]
+margin_left = 74.0
+margin_right = 74.0
+margin_bottom = 19.0
+
+[node name="Level" type="Label" parent="Stats/Control"]
+margin_top = 5.0
+margin_right = 4.0
+margin_bottom = 28.0
+theme = SubResource( 7 )
+text = "1
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FlashPlayer" type="AnimationPlayer" parent="."]
+anims/low_health = SubResource( 8 )
+
+[node name="ColorRect" type="ColorRect" parent="FlashPlayer"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 320, 180 )
+color = Color( 1, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FadePlayer" type="AnimationPlayer" parent="."]
+anims/fade_out = SubResource( 9 )
+
+[node name="ColorRect" type="ColorRect" parent="FadePlayer"]
+margin_right = 320.0
+margin_bottom = 180.0
+rect_min_size = Vector2( 320, 180 )
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="LevelUp/Control/LevelUpStatLevels/BowStat/StatBackground" to="." method="_on_StatBackground_pressed" binds= [ "bow" ]]
+[connection signal="pressed" from="LevelUp/Control/LevelUpStatLevels/ManaStat/StatBackground" to="." method="_on_StatBackground_pressed" binds= [ "mana" ]]
+[connection signal="pressed" from="LevelUp/Control/LevelUpStatLevels/StaminaStat/StatBackground" to="." method="_on_StatBackground_pressed" binds= [ "stamina" ]]
+[connection signal="pressed" from="LevelUp/Control/LevelUpStatLevels/SwordStat/StatBackground" to="." method="_on_StatBackground_pressed" binds= [ "sword" ]]
+[connection signal="pressed" from="LevelUp/Control/LevelUpStatLevels/BowSpeedStat/StatBackground" to="." method="_on_StatBackground_pressed" binds= [ "bow_speed" ]]
+[connection signal="pressed" from="LevelUp/Control/LevelUpStatLevels/ManaRegenStat/StatBackground" to="." method="_on_StatBackground_pressed" binds= [ "mana_regen" ]]
+[connection signal="pressed" from="LevelUp/Control/LevelUpStatLevels/StaminaRegenStat/StatBackground" to="." method="_on_StatBackground_pressed" binds= [ "stamina_regen" ]]
+[connection signal="pressed" from="LevelUp/Control/LevelUpStatLevels/SwordSpeedStat/StatBackground" to="." method="_on_StatBackground_pressed" binds= [ "sword_speed" ]]
+[connection signal="pressed" from="LevelUp/Control/LevelUpStatLevels/DefenseStat/StatBackground" to="." method="_on_StatBackground_pressed" binds= [ "defense" ]]
+[connection signal="pressed" from="LevelUp/Control/LevelUpStatLevels/HealthStat/StatBackground" to="." method="_on_StatBackground_pressed" binds= [ "health" ]]
+[connection signal="pressed" from="LevelUp/Control/LevelUpStatLevels/MagicStat/StatBackground" to="." method="_on_StatBackground_pressed" binds= [ "magic" ]]
+[connection signal="pressed" from="LevelUp/Control/LevelUpStatLevels/SpeedStat/StatBackground" to="." method="_on_StatBackground_pressed" binds= [ "speed" ]]

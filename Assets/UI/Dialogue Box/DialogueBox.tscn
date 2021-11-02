@@ -1,0 +1,77 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/UI/Fonts/8bitOperatorPlus-Bold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Assets/UI/Dialogue Box/Background.png" type="Texture" id=2]
+[ext_resource path="res://Assets/UI/Fonts/8bitOperatorPlus8-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Assets/UI/Dialogue Box/DialogueBox.gd" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 5
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 5
+font_data = ExtResource( 3 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DialogueBox" type="Control" parent="."]
+margin_left = 36.0
+margin_top = 123.0
+margin_right = 286.0
+margin_bottom = 173.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="DialogueBox"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="DialogueBox"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+custom_fonts/normal_font = SubResource( 1 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Skip" type="Label" parent="DialogueBox"]
+anchor_left = 0.808
+anchor_top = 0.82
+anchor_right = 0.808
+anchor_bottom = 0.82
+margin_top = -3.8147e-06
+margin_right = 44.0
+margin_bottom = 6.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Press F to Skip"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="DialogueBox"]
+wait_time = 0.05
+autostart = true
+[connection signal="timeout" from="DialogueBox/Timer" to="DialogueBox/Text" method="_on_Timer_timeout"]

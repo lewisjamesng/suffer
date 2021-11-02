@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/Components/World/House.tscn" type="PackedScene" id=1]
+
+[node name="House" instance=ExtResource( 1 )]
+
+[node name="WallDecoration" parent="TileMap" index="1"]
+tile_data = PoolIntArray( 65541, 0, 196626, 65542, 0, 196627, 65549, 0, 131108, 65551, 0, 983069, 65552, 0, 983070, 131077, 0, 262162, 131078, 0, 524303, 131079, 0, 786467, 131080, 0, 786469, 131081, 0, 786469, 131082, 0, 786472 )
+
+[node name="Carpet" parent="TileMap" index="4"]
+tile_data = PoolIntArray( 131083, 0, 393256, 196619, 0, 524327, 327684, 0, 1048576, 327685, 0, 1048577, 327686, 0, 1048577, 327687, 0, 1048577, 327688, 0, 1048577, 327689, 0, 1048578, 393220, 0, 1114112, 393221, 0, 1114113, 393222, 0, 1114113, 393223, 0, 1114113, 393224, 0, 1114113, 393225, 0, 1114114, 458756, 0, 1179648, 458757, 0, 1179649, 458758, 0, 1179649, 458759, 0, 1179649, 458760, 0, 1179649, 458761, 0, 1179650 )
+
+[node name="Chairs" parent="WorldObjects" index="0"]
+tile_data = PoolIntArray( 327691, 0, 393228 )
+
+[node name="InsideTiles" parent="WorldObjects" index="1"]
+tile_data = PoolIntArray( 262155, 0, 65540 )

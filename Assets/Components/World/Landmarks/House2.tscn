@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Sprites/World/Landmarks/house2-animated.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Components/World/Landmarks/House1.tscn" type="PackedScene" id=2]
+
+[node name="House2" instance=ExtResource( 2 )]
+
+[node name="House" parent="." index="2"]
+texture = ExtResource( 1 )

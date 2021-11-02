@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Scripts/Player/PlayerStats.gd" type="Script" id=2]
+[ext_resource path="res://Assets/UI/UI.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Scripts/WarpManager.gd" type="Script" id=4]
+
+[node name="Persistent" type="Node2D"]
+
+[node name="PlayerStats" type="Node2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="UI" parent="." instance=ExtResource( 3 )]
+
+[node name="WarpManager" type="Node2D" parent="."]
+script = ExtResource( 4 )
